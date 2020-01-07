@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from 'react';
+import { Provider, Store } from './store';
 
-function App() {
+const Counter = () => {
+  const { state, dispatch } = useContext(Store);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      count: {state.count}
+      <div>
+        <button onClick={() => dispatch({ type: 'INCREMENT' })}>+</button>
+        <button onClick={() => dispatch({ type: 'DECREMENT' })}>-</button>
+      </div>
+    </>
   );
 }
+
+const App = () => (
+  <Provider>
+    <Counter />
+  </Provider>
+);
 
 export default App;
